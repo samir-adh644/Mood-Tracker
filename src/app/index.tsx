@@ -1,98 +1,101 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image, StyleSheet, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function Index() {
+  const { top } = useSafeAreaInsets();
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    // <View style={[styles.container, { padding: top }]}>
+    //   <Text>I am the text</Text>
+    //   <Image
+    //     style={styles.image}
+    //     source={require("@/app/assets/emoji/happy.png")}
+    //   />
+    // </View>
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+    <View style={[styles.container, { paddingTop: top }]}>
+      <View style={styles.upperChild}>
+        <Text style={styles.headerText}>How are you feeling today?</Text>
+        <View style={styles.emojiBox}>
+          <View style={styles.emojiCard}>
+            <Image
+              style={styles.image}
+              source={require("@/app/assets/emoji/happy.png")}
+            />
+            <Text>Happy</Text>
+          </View>
+          <View style={styles.emojiCard}>
+            <Image
+              style={styles.image}
+              source={require("@/app/assets/emoji/neutral.png")}
+            />
+            <Text>Neutral</Text>
+          </View>
+          {/* <View style={styles.emojiCard}>
+            <Image
+              style={styles.image}
+              source={require("@/app/assets/emoji/anxious.png")}
+            />
+          </View> */}
+          <View style={styles.emojiCard}>
+            <Image
+              style={styles.image}
+              source={require("@/app/assets/emoji/sad.png")}
+            />
+            <Text>Sad</Text>
+          </View>
+          <View style={styles.emojiCard}>
+            <Image
+              style={styles.image}
+              source={require("@/app/assets/emoji/angry.png")}
+            />
+            <Text>Angry</Text>
+          </View>
+        </View>
+      </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+      <View></View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: "#F9FBFC",
   },
-  safeArea: {
+
+  image: {
+    height: 50,
+    width: 50,
+  },
+  upperChild: {
+    height: 400,
+    width: "100%",
+    paddingHorizontal: 15,
+  },
+  emojiBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    height: 120,
+    marginTop: 10,
+  },
+  emojiCard: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+    justifyContent: "center",
+    gap: 5,
+    alignItems: "center",
+    height: 100,
+    backgroundColor: "#FFFFFF",
+    marginHorizontal: 4,
+    borderRadius: 8,
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2",
+    elevation: 5,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  headerText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 20,
   },
 });
