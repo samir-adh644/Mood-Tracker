@@ -17,10 +17,11 @@ export default function TextArea({ style, ...props }: Props) {
 
 const styles = StyleSheet.create({
   root: {
-    borderColor: "black",
+    borderColor: "#f6f4f4",
     borderWidth: 2,
     borderRadius: 12,
     padding: 12,
     minHeight: 100,
+    backgroundColor: "#FFFFFF",
   },
 });

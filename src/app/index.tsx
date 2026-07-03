@@ -1,7 +1,8 @@
 import Emoji from "@/components/Emoji";
 import { HeaderText } from "@/components/HeaderText";
+import MyButton from "@/components/MyButton";
 import TextArea from "@/components/TextArea";
-import { Button, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { EMOJIS } from "./assets/data/emoji";
 
@@ -19,7 +20,7 @@ export default function Index() {
         <View style={styles.notesPart}>
           <HeaderText>Notes</HeaderText>
           <TextArea />
-          <Button title="Save" />
+          <MyButton btnTxt={"Save Mood"} />
         </View>
       </View>
 
@@ -70,5 +71,7 @@ const styles = StyleSheet.create({
   },
   notesPart: {
     gap: 10,
+    flex: 1,
+    width: "100%",
   },
 });
