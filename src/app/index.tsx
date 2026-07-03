@@ -1,55 +1,18 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import Emoji from "@/components/Emoji";
+import { StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { EMOJIS } from "./assets/emoji";
 
 export default function Index() {
   const { top } = useSafeAreaInsets();
   return (
-    // <View style={[styles.container, { padding: top }]}>
-    //   <Text>I am the text</Text>
-    //   <Image
-    //     style={styles.image}
-    //     source={require("@/app/assets/emoji/happy.png")}
-    //   />
-    // </View>
-
     <View style={[styles.container, { paddingTop: top }]}>
       <View style={styles.upperChild}>
         <Text style={styles.headerText}>How are you feeling today?</Text>
         <View style={styles.emojiBox}>
-          <View style={styles.emojiCard}>
-            <Image
-              style={styles.image}
-              source={require("@/app/assets/emoji/happy.png")}
-            />
-            <Text>Happy</Text>
-          </View>
-          <View style={styles.emojiCard}>
-            <Image
-              style={styles.image}
-              source={require("@/app/assets/emoji/neutral.png")}
-            />
-            <Text>Neutral</Text>
-          </View>
-          {/* <View style={styles.emojiCard}>
-            <Image
-              style={styles.image}
-              source={require("@/app/assets/emoji/anxious.png")}
-            />
-          </View> */}
-          <View style={styles.emojiCard}>
-            <Image
-              style={styles.image}
-              source={require("@/app/assets/emoji/sad.png")}
-            />
-            <Text>Sad</Text>
-          </View>
-          <View style={styles.emojiCard}>
-            <Image
-              style={styles.image}
-              source={require("@/app/assets/emoji/angry.png")}
-            />
-            <Text>Angry</Text>
-          </View>
+          {EMOJIS.map((emoji) => (
+            <Emoji text={emoji.name} source={emoji.image} />
+          ))}
         </View>
       </View>
 
@@ -65,8 +28,8 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    height: 50,
-    width: 50,
+    height: 30,
+    width: 30,
   },
   upperChild: {
     height: 400,
@@ -75,11 +38,12 @@ const styles = StyleSheet.create({
   },
   emojiBox: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
     height: 120,
     marginTop: 10,
+    flexWrap: "wrap",
   },
   emojiCard: {
     flex: 1,
@@ -90,7 +54,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     marginHorizontal: 4,
     borderRadius: 8,
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2",
     elevation: 5,
   },
   headerText: {

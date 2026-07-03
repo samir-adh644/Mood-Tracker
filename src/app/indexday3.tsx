@@ -1,3 +1,4 @@
+import { HeaderText } from "@/components/headerText";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
@@ -40,7 +41,8 @@ export default function Index() {
             </View>
 
             <View style={styles.cardView}>
-              <Text style={styles.headerText}>React Native - By ACES</Text>
+              {/* <Text style={styles.headerText}>React Native - By ACES</Text> */}
+              <HeaderText>How are you feeling today?</HeaderText>
               <Text style={styles.paraText}>
                 A 7 day React Native Workshop Organized by ACES is currently
                 running and it will run for four more days.
