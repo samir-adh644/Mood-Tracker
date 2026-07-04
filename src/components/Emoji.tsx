@@ -1,9 +1,9 @@
 import {
-    Image,
-    ImageSourcePropType,
-    StyleSheet,
-    Text,
-    View,
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 
 type Props = {
@@ -15,7 +15,7 @@ export default function Emoji({ text, source }: Props) {
   return (
     <View style={styles.emojiCard}>
       <Image style={styles.image} source={source} />
-      <Text>{text}</Text>
+      <Text style={styles.cardText}>{text}</Text>
     </View>
   );
 }
@@ -35,5 +35,8 @@ const styles = StyleSheet.create({
   image: {
     height: 40,
     width: 40,
+  },
+  cardText: {
+    fontFamily: "SpaceGrotesk_300Light",
   },
 });

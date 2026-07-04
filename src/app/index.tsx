@@ -1,13 +1,15 @@
+import { TRACKER } from "@/assets/expo.icon/Assets/tracker";
 import Emoji from "@/components/Emoji";
 import { HeaderText } from "@/components/HeaderText";
 import MyButton from "@/components/MyButton";
 import TextArea from "@/components/TextArea";
-import { StyleSheet, View } from "react-native";
+import TrackBox from "@/components/TrackBox";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { EMOJIS } from "./assets/data/emoji";
+import { EMOJIS } from "../../assets/expo.icon/Assets/emoji";
 
 export default function Index() {
-  const { top } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   return (
     <View style={[styles.container, { paddingTop: top }]}>
       <View style={styles.upperChild}>
@@ -24,7 +26,13 @@ export default function Index() {
         </View>
       </View>
 
-      <View></View>
+      <View style={styles.lowerChild}>
+        <ScrollView>
+          {TRACKER.map((data) => (
+            <TrackBox date={data.date} key={data.date} cards={data.card} />
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -73,5 +81,10 @@ const styles = StyleSheet.create({
     gap: 10,
     flex: 1,
     width: "100%",
+  },
+  lowerChild: {
+    height: 400,
+    width: "100%",
+    paddingHorizontal: 15,
   },
 });

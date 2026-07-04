@@ -9,6 +9,7 @@ export const HeaderText = ({ style, ...props }: Props) => {
 const styles = StyleSheet.create({
   text: {
     fontSize: 16,
-    fontWeight: "bold",
+    // fontWeight: "bold",
+    fontFamily: "SpaceGrotesk_700Bold",
   },
 });
