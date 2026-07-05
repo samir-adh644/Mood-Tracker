@@ -1,8 +1,9 @@
+import { ComponentProps } from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 
 type Props = {
   btnTxt: string;
-};
+} & ComponentProps<typeof Pressable>;
 export default function MyButton({ btnTxt }: Props) {
   return (
     <Pressable style={styles.button}>
