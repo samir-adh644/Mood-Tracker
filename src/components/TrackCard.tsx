@@ -1,6 +1,6 @@
+import { ChevronRight } from "lucide-react-native";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { HeaderText } from "./HeaderText";
-
 type Props = {
   time: string;
   mood: string;
@@ -22,7 +22,7 @@ const TrackCard = ({ time, mood, note }: Props) => {
         <Text style={styles.txt}>{note} </Text>
       </View>
       <View style={styles.goBtn}>
-        <Text>Go</Text>
+        <ChevronRight />
       </View>
     </View>
   );

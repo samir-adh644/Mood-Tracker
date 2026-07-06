@@ -6,10 +6,22 @@ import Emoji from "./Emoji";
 import { HeaderText } from "./HeaderText";
 import TextArea from "./TextArea";
 
+// type SavedMood = {
+//   emoji: number;
+//   text: string;
+//   date: string;
+// };
+
+type CardItem = {
+  id: number;
+  time: string;
+  mood: number;
+  note: string;
+};
+
 type SavedMood = {
-  emoji: number;
-  text: string;
   date: string;
+  cards: CardItem[];
 };
 
 const MoodForm = () => {
@@ -53,11 +65,43 @@ const MoodForm = () => {
                 data = JSON.parse(existing);
               }
 
-              data.push({
-                date: new Date().toISOString(),
-                emoji: selectedEmoji,
-                text: text,
+              // data.push({
+              //   date: new Date().toISOString(),
+              //   emoji: selectedEmoji,
+              //   text: text,
+              // });
+
+              await AsyncStorage.clear();
+
+              const todayLabel = new Date().toLocaleString("en-US", {
+                day: "numeric",
+                month: "long",
               });
+              const currentTime = new Date().toLocaleString("en-US", {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true,
+              });
+
+              let existingDayGroup = data.find(
+                (item) => item.date === todayLabel,
+              );
+
+              const newCardItem = {
+                id: Date.now(),
+                time: currentTime,
+                mood: selectedEmoji,
+                note: text,
+              };
+
+              if (existingDayGroup) {
+                existingDayGroup.cards.push(newCardItem);
+              } else {
+                data.push({
+                  date: todayLabel,
+                  cards: [newCardItem],
+                });
+              }
 
               await AsyncStorage.setItem("moods", JSON.stringify(data));
 

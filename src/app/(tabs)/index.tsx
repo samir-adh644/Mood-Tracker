@@ -1,7 +1,6 @@
-import { TRACKER } from "@/assets/expo.icon/Assets/tracker";
 import MoodForm from "@/components/MoodForm";
-import TrackBox from "@/components/TrackBox";
-import { ScrollView, StyleSheet, View } from "react-native";
+import SavedMoods from "@/components/SavedMoods";
+import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -11,13 +10,7 @@ export default function Index() {
     <View style={[styles.container, { paddingTop: top }]}>
       <MoodForm />
 
-      <View style={styles.lowerChild}>
-        <ScrollView>
-          {TRACKER.map((data) => (
-            <TrackBox date={data.date} key={data.date} cards={data.card} />
-          ))}
-        </ScrollView>
-      </View>
+      <SavedMoods />
     </View>
   );
 }
@@ -37,10 +30,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 20,
-  },
-  lowerChild: {
-    height: 330,
-    width: "100%",
-    paddingHorizontal: 15,
   },
 });
